@@ -1,0 +1,964 @@
+% Please use XelaTeX to compile
+\documentclass[a4paper,oneside]{book}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{extarrows}
+\usepackage{float}
+\usepackage[perpage]{footmisc}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage[thmmarks]{ntheorem}
+	{
+		\theoremheaderfont{\normalfont}
+		\theorembodyfont{\normalfont}
+		\theoremsymbol{\mbox{$\Box$}}
+		\newtheorem*{proof}{\textit{Proof.}}
+	}
+\usepackage{xeCJK}
+\usepackage[all, pdf]{xy}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows}
+
+%
+\usepackage[margin=5pt]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{multicol}
+\usepackage{xcoffins}
+\usepackage{color}
+\newcommand\cbox[2][.8]{{\setlength\fboxsep{0pt}\colorbox[gray]{#1}{#2}}}
+\pagestyle{empty}
+\usepackage{atbegshi}% http://ctan.org/pkg/atbegshi
+\AtBeginDocument{\AtBeginShipoutNext{\AtBeginShipoutDiscard}}
+%
+
+\theorembodyfont{\normalfont}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{axiom}{Axiom}[chapter]
+\newtheorem{assumption}{Assumption}[chapter]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{example}{Example}[section]
+\newtheorem{remark}{Remark}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem*{verify}{Verify}
+
+\author{Ph\ae drus}
+
+\begin{document}
+	\begin{titlepage} %start
+		\NewCoffin \result
+		\NewCoffin \aaa
+		\NewCoffin \bbb
+		\NewCoffin \ccc
+		\NewCoffin \ddd
+		\NewCoffin \eee
+		\NewCoffin \fff
+		\NewCoffin \rulei
+		\NewCoffin \ruleii
+		\NewCoffin \ruleiii
+		
+		\SetHorizontalCoffin \result {}
+		\SetHorizontalCoffin \aaa {\fontsize{52}{50}\sffamily\bfseries\makebox[12cm][c]{Algebra~I}}
+		\SetHorizontalCoffin \bbb {\fontsize{40}{50}\sffamily\bfseries My Mathematics Notes}
+		\SetHorizontalCoffin \ccc {\fontsize{12}{10}\sffamily 
+			\qquad\qquad By A Student from the Australian National University, Canberra \textbullet{} \today}
+		\SetHorizontalCoffin \ddd {\fontsize{28}{20}\sffamily Ph\ae drus}
+		\SetVerticalCoffin \eee {250pt}
+		{\raggedleft\fontsize{35}{35}\sffamily\bfseries 
+			\medskip Linear Algebra}
+		\SetVerticalCoffin \fff {140pt}
+		{\raggedright \fontsize{13}{14}\sffamily\bfseries 
+			~\\~\\~\\~\\~\\~\\~\\~\\~}
+		\RotateCoffin \bbb {90}
+		\RotateCoffin \ccc {270}
+		\SetHorizontalCoffin \rulei  {\color{red}\rule{6.5in}{1pc}}
+		\SetHorizontalCoffin \ruleii {\color{red}\rule{1pc}{23.5cm}}
+		\SetHorizontalCoffin \ruleiii{\color{black}\rule{5pt}{150pt}}
+		\JoinCoffins \result                \aaa 
+		\JoinCoffins \result[\aaa-t,\aaa-r] \rulei   [b,r](0pt,2mm)
+		\JoinCoffins \result[\aaa-b,\aaa-l] \bbb     [B,r](0pt,0pt)
+		\JoinCoffins \result[\bbb-t,\bbb-r] \ruleii  [t,r](-2mm,0pt)
+		\JoinCoffins \result[\aaa-B,\aaa-r] \ccc     [B,l](80pt,14pc)
+		\JoinCoffins \result[\bbb-l,\ccc-B] \fff     [t,r](-2mm,0pt)
+		\JoinCoffins \result[\fff-b,\fff-r] \ruleiii [b,l](2mm,0pt)
+		\JoinCoffins \result[\ccc-r,\fff-l] \eee     [B,r](50pt,-50pt)
+		\JoinCoffins \result[\eee-T,\eee-r] \ddd     [B,r](0pt,6pc)
+		\TypesetCoffin \result
+	\end{titlepage} %end
+	\newgeometry{left=3cm, right=3cm, top=3cm, bottom=3cm}
+	\tableofcontents
+	\chapter{Introduction}
+		\section{What is Algebra? \& The structure of this note}
+			Generally speaking, Algebra is a subject about operations. However, to discuss Algebra in a more detailed way, we have to first talk about some history of Algebra.
+			\vspace*{-4mm}
+			\begin{table}[H]
+				\centering
+				\resizebox{\textwidth}{!}{
+					\begin{tabular}{lcl}
+						\hline \\[-1.75ex]
+						& 815 AD         & The first book of Algebra appeared.                                 \\
+						\begin{tabular}[c]{@{}l@{}}Era of Elementary Algebra\\ Focusing on:\\ Operations, $\mathbb{C}$, Solving equations, Properties of roots\end{tabular} & $\Bigg\updownarrow$ & 1637: Fermat's Last Theorem                                         \\
+						& 1832           &                                                                     \\
+						\begin{tabular}[c]{@{}l@{}}Era of Modern Algebra\\ Focusing on:\\ Mathematical Structures and their morphisms \end{tabular}  & $\Bigg\updownarrow$ & 1994: Fermat's Last Theorem proved by Wiles\\
+						& Now            & \\
+						\hline
+					\end{tabular}
+				}
+			\end{table}
+			\vspace*{-4mm}
+			\noindent To help further understanding, the map of this note is now given.\\
+			\textbf{ Part 1: Linear Algebra}
+			\begin{table}[H]
+				\ifx\du\undefined
+				\newlength{\du}
+				\fi
+				\setlength{\du}{15\unitlength}
+				\begin{tikzpicture}
+				\pgftransformxscale{1.000000}
+				\pgftransformyscale{-1.000000}
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\fill (11.077780\du,-4.941786\du)--(11.077780\du,-3.041786\du)--(19.024030\du,-3.041786\du)--(19.024030\du,-4.941786\du)--cycle;
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{11.077785\du}{-4.941786\du}}
+				\pgfpatharc{270}{180}{0.200000\du and 0.200000\du}
+				\pgfusepath{fill}
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{19.224030\du}{-4.741786\du}}
+				\pgfpatharc{360}{270}{0.200000\du and 0.200000\du}
+				\pgfusepath{fill}
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\fill (10.877780\du,-4.741786\du)--(10.877780\du,-3.241786\du)--(19.224030\du,-3.241786\du)--(19.224030\du,-4.741786\du)--cycle;
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{10.877780\du}{-3.241796\du}}
+				\pgfpatharc{180}{90}{0.200000\du and 0.200000\du}
+				\pgfusepath{fill}
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{19.024014\du}{-3.041786\du}}
+				\pgfpatharc{90}{0}{0.200000\du and 0.200000\du}
+				\pgfusepath{fill}
+				\pgfsetlinewidth{0.100000\du}
+				\pgfsetdash{}{0pt}
+				\pgfsetdash{}{0pt}
+				\pgfsetmiterjoin
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\draw (11.077780\du,-4.941786\du)--(19.024030\du,-4.941786\du);
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\draw (11.077780\du,-3.041786\du)--(19.024030\du,-3.041786\du);
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{11.077785\du}{-4.941786\du}}
+				\pgfpatharc{270}{180}{0.200000\du and 0.200000\du}
+				\pgfusepath{stroke}
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{19.224030\du}{-4.741786\du}}
+				\pgfpatharc{360}{270}{0.200000\du and 0.200000\du}
+				\pgfusepath{stroke}
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\draw (10.877780\du,-4.741786\du)--(10.877780\du,-3.241786\du);
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\draw (19.224030\du,-4.741786\du)--(19.224030\du,-3.241786\du);
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{10.877780\du}{-3.241796\du}}
+				\pgfpatharc{180}{90}{0.200000\du and 0.200000\du}
+				\pgfusepath{stroke}
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{19.024014\du}{-3.041786\du}}
+				\pgfpatharc{90}{0}{0.200000\du and 0.200000\du}
+				\pgfusepath{stroke}
+				% setfont left to latex
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\node at (15.050905\du,-3.9000\du){Linear Equation System};
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\fill (0.200000\du,-1.000000\du)--(0.200000\du,0.980000\du)--(7.900000\du,0.980000\du)--(7.900000\du,-1.000000\du)--cycle;
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{0.200005\du}{-1.000000\du}}
+				\pgfpatharc{270}{180}{0.200000\du and 0.200000\du}
+				\pgfusepath{fill}
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{8.100000\du}{-0.800000\du}}
+				\pgfpatharc{360}{270}{0.200000\du and 0.200000\du}
+				\pgfusepath{fill}
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\fill (0.000000\du,-0.800000\du)--(0.000000\du,0.780000\du)--(8.100000\du,0.780000\du)--(8.100000\du,-0.800000\du)--cycle;
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{0.000000\du}{0.779990\du}}
+				\pgfpatharc{180}{90}{0.200000\du and 0.200000\du}
+				\pgfusepath{fill}
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{7.899984\du}{0.980000\du}}
+				\pgfpatharc{90}{0}{0.200000\du and 0.200000\du}
+				\pgfusepath{fill}
+				\pgfsetlinewidth{0.100000\du}
+				\pgfsetdash{}{0pt}
+				\pgfsetdash{}{0pt}
+				\pgfsetmiterjoin
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\draw (0.200000\du,-1.000000\du)--(7.900000\du,-1.000000\du);
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\draw (0.200000\du,0.980000\du)--(7.900000\du,0.980000\du);
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{0.200005\du}{-1.000000\du}}
+				\pgfpatharc{270}{180}{0.200000\du and 0.200000\du}
+				\pgfusepath{stroke}
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{8.100000\du}{-0.800000\du}}
+				\pgfpatharc{360}{270}{0.200000\du and 0.200000\du}
+				\pgfusepath{stroke}
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\draw (0.000000\du,-0.800000\du)--(0.000000\du,0.780000\du);
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\draw (8.100000\du,-0.800000\du)--(8.100000\du,0.780000\du);
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{0.000000\du}{0.779990\du}}
+				\pgfpatharc{180}{90}{0.200000\du and 0.200000\du}
+				\pgfusepath{stroke}
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{7.899984\du}{0.980000\du}}
+				\pgfpatharc{90}{0}{0.200000\du and 0.200000\du}
+				\pgfusepath{stroke}
+				% setfont left to latex
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\node at (4.050000\du,0.0500000\du){ Vector Space};
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\fill (11.200000\du,-1.000000\du)--(11.200000\du,0.900000\du)--(18.900000\du,0.900000\du)--(18.900000\du,-1.000000\du)--cycle;
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{11.200005\du}{-1.000000\du}}
+				\pgfpatharc{270}{180}{0.200000\du and 0.200000\du}
+				\pgfusepath{fill}
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{19.100000\du}{-0.800000\du}}
+				\pgfpatharc{360}{270}{0.200000\du and 0.200000\du}
+				\pgfusepath{fill}
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\fill (11.000000\du,-0.800000\du)--(11.000000\du,0.700000\du)--(19.100000\du,0.700000\du)--(19.100000\du,-0.800000\du)--cycle;
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{11.000000\du}{0.699989\du}}
+				\pgfpatharc{180}{90}{0.200000\du and 0.200000\du}
+				\pgfusepath{fill}
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{18.899984\du}{0.900000\du}}
+				\pgfpatharc{90}{0}{0.200000\du and 0.200000\du}
+				\pgfusepath{fill}
+				\pgfsetlinewidth{0.100000\du}
+				\pgfsetdash{}{0pt}
+				\pgfsetdash{}{0pt}
+				\pgfsetmiterjoin
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\draw (11.200000\du,-1.000000\du)--(18.900000\du,-1.000000\du);
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\draw (11.200000\du,0.900000\du)--(18.900000\du,0.900000\du);
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{11.200005\du}{-1.000000\du}}
+				\pgfpatharc{270}{180}{0.200000\du and 0.200000\du}
+				\pgfusepath{stroke}
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{19.100000\du}{-0.800000\du}}
+				\pgfpatharc{360}{270}{0.200000\du and 0.200000\du}
+				\pgfusepath{stroke}
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\draw (11.000000\du,-0.800000\du)--(11.000000\du,0.700000\du);
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\draw (19.100000\du,-0.800000\du)--(19.100000\du,0.700000\du);
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{11.000000\du}{0.699989\du}}
+				\pgfpatharc{180}{90}{0.200000\du and 0.200000\du}
+				\pgfusepath{stroke}
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{18.899984\du}{0.900000\du}}
+				\pgfpatharc{90}{0}{0.200000\du and 0.200000\du}
+				\pgfusepath{stroke}
+				% setfont left to latex
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\node at (15.050000\du,0.05000\du){Determinant};
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\fill (22.200000\du,-1.000000\du)--(22.200000\du,0.900000\du)--(29.900000\du,0.900000\du)--(29.900000\du,-1.000000\du)--cycle;
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{22.200005\du}{-1.000000\du}}
+				\pgfpatharc{270}{180}{0.200000\du and 0.200000\du}
+				\pgfusepath{fill}
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{30.100000\du}{-0.800000\du}}
+				\pgfpatharc{360}{270}{0.200000\du and 0.200000\du}
+				\pgfusepath{fill}
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\fill (22.000000\du,-0.800000\du)--(22.000000\du,0.700000\du)--(30.100000\du,0.700000\du)--(30.100000\du,-0.800000\du)--cycle;
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{22.000000\du}{0.699989\du}}
+				\pgfpatharc{180}{90}{0.200000\du and 0.200000\du}
+				\pgfusepath{fill}
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{29.899984\du}{0.900000\du}}
+				\pgfpatharc{90}{0}{0.200000\du and 0.200000\du}
+				\pgfusepath{fill}
+				\pgfsetlinewidth{0.100000\du}
+				\pgfsetdash{}{0pt}
+				\pgfsetdash{}{0pt}
+				\pgfsetmiterjoin
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\draw (22.200000\du,-1.000000\du)--(29.900000\du,-1.000000\du);
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\draw (22.200000\du,0.900000\du)--(29.900000\du,0.900000\du);
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{22.200005\du}{-1.000000\du}}
+				\pgfpatharc{270}{180}{0.200000\du and 0.200000\du}
+				\pgfusepath{stroke}
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{30.100000\du}{-0.800000\du}}
+				\pgfpatharc{360}{270}{0.200000\du and 0.200000\du}
+				\pgfusepath{stroke}
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\draw (22.000000\du,-0.800000\du)--(22.000000\du,0.700000\du);
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\draw (30.100000\du,-0.800000\du)--(30.100000\du,0.700000\du);
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{22.000000\du}{0.699989\du}}
+				\pgfpatharc{180}{90}{0.200000\du and 0.200000\du}
+				\pgfusepath{stroke}
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{29.899984\du}{0.900000\du}}
+				\pgfpatharc{90}{0}{0.200000\du and 0.200000\du}
+				\pgfusepath{stroke}
+				% setfont left to latex
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\node at (26.050000\du,0.050000\du){Matrix};
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\fill (0.200000\du,3.000000\du)--(0.200000\du,4.900000\du)--(7.900000\du,4.900000\du)--(7.900000\du,3.000000\du)--cycle;
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{0.200005\du}{3.000000\du}}
+				\pgfpatharc{270}{180}{0.200000\du and 0.200000\du}
+				\pgfusepath{fill}
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{8.100000\du}{3.200000\du}}
+				\pgfpatharc{360}{270}{0.200000\du and 0.200000\du}
+				\pgfusepath{fill}
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\fill (0.000000\du,3.200000\du)--(0.000000\du,4.700000\du)--(8.100000\du,4.700000\du)--(8.100000\du,3.200000\du)--cycle;
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{0.000000\du}{4.699989\du}}
+				\pgfpatharc{180}{90}{0.200000\du and 0.200000\du}
+				\pgfusepath{fill}
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{7.899984\du}{4.900000\du}}
+				\pgfpatharc{90}{0}{0.200000\du and 0.200000\du}
+				\pgfusepath{fill}
+				\pgfsetlinewidth{0.100000\du}
+				\pgfsetdash{}{0pt}
+				\pgfsetdash{}{0pt}
+				\pgfsetmiterjoin
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\draw (0.200000\du,3.000000\du)--(7.900000\du,3.000000\du);
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\draw (0.200000\du,4.900000\du)--(7.900000\du,4.900000\du);
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{0.200005\du}{3.000000\du}}
+				\pgfpatharc{270}{180}{0.200000\du and 0.200000\du}
+				\pgfusepath{stroke}
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{8.100000\du}{3.200000\du}}
+				\pgfpatharc{360}{270}{0.200000\du and 0.200000\du}
+				\pgfusepath{stroke}
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\draw (0.000000\du,3.200000\du)--(0.000000\du,4.700000\du);
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\draw (8.100000\du,3.200000\du)--(8.100000\du,4.700000\du);
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{0.000000\du}{4.699989\du}}
+				\pgfpatharc{180}{90}{0.200000\du and 0.200000\du}
+				\pgfusepath{stroke}
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{7.899984\du}{4.900000\du}}
+				\pgfpatharc{90}{0}{0.200000\du and 0.200000\du}
+				\pgfusepath{stroke}
+				% setfont left to latex
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\node at (4.050000\du,4.0000\du){Linear Space};
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\fill (22.200000\du,3.000000\du)--(22.200000\du,4.900000\du)--(29.900000\du,4.900000\du)--(29.900000\du,3.000000\du)--cycle;
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{22.200005\du}{3.000000\du}}
+				\pgfpatharc{270}{180}{0.200000\du and 0.200000\du}
+				\pgfusepath{fill}
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{30.100000\du}{3.200000\du}}
+				\pgfpatharc{360}{270}{0.200000\du and 0.200000\du}
+				\pgfusepath{fill}
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\fill (22.000000\du,3.200000\du)--(22.000000\du,4.700000\du)--(30.100000\du,4.700000\du)--(30.100000\du,3.200000\du)--cycle;
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{22.000000\du}{4.699989\du}}
+				\pgfpatharc{180}{90}{0.200000\du and 0.200000\du}
+				\pgfusepath{fill}
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{29.899984\du}{4.900000\du}}
+				\pgfpatharc{90}{0}{0.200000\du and 0.200000\du}
+				\pgfusepath{fill}
+				\pgfsetlinewidth{0.100000\du}
+				\pgfsetdash{}{0pt}
+				\pgfsetdash{}{0pt}
+				\pgfsetmiterjoin
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\draw (22.200000\du,3.000000\du)--(29.900000\du,3.000000\du);
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\draw (22.200000\du,4.900000\du)--(29.900000\du,4.900000\du);
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{22.200005\du}{3.000000\du}}
+				\pgfpatharc{270}{180}{0.200000\du and 0.200000\du}
+				\pgfusepath{stroke}
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{30.100000\du}{3.200000\du}}
+				\pgfpatharc{360}{270}{0.200000\du and 0.200000\du}
+				\pgfusepath{stroke}
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\draw (22.000000\du,3.200000\du)--(22.000000\du,4.700000\du);
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\draw (30.100000\du,3.200000\du)--(30.100000\du,4.700000\du);
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{22.000000\du}{4.699989\du}}
+				\pgfpatharc{180}{90}{0.200000\du and 0.200000\du}
+				\pgfusepath{stroke}
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{29.899984\du}{4.900000\du}}
+				\pgfpatharc{90}{0}{0.200000\du and 0.200000\du}
+				\pgfusepath{stroke}
+				% setfont left to latex
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\node at (26.050000\du,4.0000\du){Linear Transformation};
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\fill (0.250000\du,6.250000\du)--(0.250000\du,9.750000\du)--(7.850000\du,9.750000\du)--(7.850000\du,6.250000\du)--cycle;
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{0.250005\du}{6.250000\du}}
+				\pgfpatharc{270}{180}{0.200000\du and 0.200000\du}
+				\pgfusepath{fill}
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{8.050000\du}{6.450000\du}}
+				\pgfpatharc{360}{270}{0.200000\du and 0.200000\du}
+				\pgfusepath{fill}
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\fill (0.050000\du,6.450000\du)--(0.050000\du,9.550000\du)--(8.050000\du,9.550000\du)--(8.050000\du,6.450000\du)--cycle;
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{0.050000\du}{9.549989\du}}
+				\pgfpatharc{180}{90}{0.200000\du and 0.200000\du}
+				\pgfusepath{fill}
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{7.849984\du}{9.750000\du}}
+				\pgfpatharc{90}{0}{0.200000\du and 0.200000\du}
+				\pgfusepath{fill}
+				\pgfsetlinewidth{0.100000\du}
+				\pgfsetdash{}{0pt}
+				\pgfsetdash{}{0pt}
+				\pgfsetmiterjoin
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\draw (0.250000\du,6.250000\du)--(7.850000\du,6.250000\du);
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\draw (0.250000\du,9.750000\du)--(7.850000\du,9.750000\du);
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{0.250005\du}{6.250000\du}}
+				\pgfpatharc{270}{180}{0.200000\du and 0.200000\du}
+				\pgfusepath{stroke}
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{8.050000\du}{6.450000\du}}
+				\pgfpatharc{360}{270}{0.200000\du and 0.200000\du}
+				\pgfusepath{stroke}
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\draw (0.050000\du,6.450000\du)--(0.050000\du,9.550000\du);
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\draw (8.050000\du,6.450000\du)--(8.050000\du,9.550000\du);
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{0.050000\du}{9.549989\du}}
+				\pgfpatharc{180}{90}{0.200000\du and 0.200000\du}
+				\pgfusepath{stroke}
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{7.849984\du}{9.750000\du}}
+				\pgfpatharc{90}{0}{0.200000\du and 0.200000\du}
+				\pgfusepath{stroke}
+				% setfont left to latex
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\node at (4.050000\du,7.30000\du){Bilinear Function};
+				% setfont left to latex
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\node at (4.050000\du,8.10000\du){and };
+				% setfont left to latex
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\node at (4.050000\du,8.90000\du){Quadratic form};
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\fill (8.806221\du,12.946486\du)--(8.806221\du,14.846486\du)--(21.281221\du,14.846486\du)--(21.281221\du,12.946486\du)--cycle;
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{8.806227\du}{12.946486\du}}
+				\pgfpatharc{270}{180}{0.200000\du and 0.200000\du}
+				\pgfusepath{fill}
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{21.481221\du}{13.146486\du}}
+				\pgfpatharc{360}{270}{0.200000\du and 0.200000\du}
+				\pgfusepath{fill}
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\fill (8.606221\du,13.146486\du)--(8.606221\du,14.646486\du)--(21.481221\du,14.646486\du)--(21.481221\du,13.146486\du)--cycle;
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{8.606221\du}{14.646476\du}}
+				\pgfpatharc{180}{90}{0.200000\du and 0.200000\du}
+				\pgfusepath{fill}
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{21.281206\du}{14.846486\du}}
+				\pgfpatharc{90}{0}{0.200000\du and 0.200000\du}
+				\pgfusepath{fill}
+				\pgfsetlinewidth{0.100000\du}
+				\pgfsetdash{}{0pt}
+				\pgfsetdash{}{0pt}
+				\pgfsetmiterjoin
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\draw (8.806221\du,12.946486\du)--(21.281221\du,12.946486\du);
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\draw (8.806221\du,14.846486\du)--(21.281221\du,14.846486\du);
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{8.806227\du}{12.946486\du}}
+				\pgfpatharc{270}{180}{0.200000\du and 0.200000\du}
+				\pgfusepath{stroke}
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{21.481221\du}{13.146486\du}}
+				\pgfpatharc{360}{270}{0.200000\du and 0.200000\du}
+				\pgfusepath{stroke}
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\draw (8.606221\du,13.146486\du)--(8.606221\du,14.646486\du);
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\draw (21.481221\du,13.146486\du)--(21.481221\du,14.646486\du);
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{8.606221\du}{14.646476\du}}
+				\pgfpatharc{180}{90}{0.200000\du and 0.200000\du}
+				\pgfusepath{stroke}
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{21.281206\du}{14.846486\du}}
+				\pgfpatharc{90}{0}{0.200000\du and 0.200000\du}
+				\pgfusepath{stroke}
+				% setfont left to latex
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\node at (15.043721\du,14.0000\du){Euclidean Space and Inner Product Space};
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\fill (22.200000\du,7.000000\du)--(22.200000\du,9.000000\du)--(29.900000\du,9.000000\du)--(29.900000\du,7.000000\du)--cycle;
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{22.200005\du}{7.000000\du}}
+				\pgfpatharc{270}{180}{0.200000\du and 0.200000\du}
+				\pgfusepath{fill}
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{30.100000\du}{7.200000\du}}
+				\pgfpatharc{360}{270}{0.200000\du and 0.200000\du}
+				\pgfusepath{fill}
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\fill (22.000000\du,7.200000\du)--(22.000000\du,8.800000\du)--(30.100000\du,8.800000\du)--(30.100000\du,7.200000\du)--cycle;
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{22.000000\du}{8.799989\du}}
+				\pgfpatharc{180}{90}{0.200000\du and 0.200000\du}
+				\pgfusepath{fill}
+				\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+				\pgfsetfillcolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{29.899984\du}{9.000000\du}}
+				\pgfpatharc{90}{0}{0.200000\du and 0.200000\du}
+				\pgfusepath{fill}
+				\pgfsetlinewidth{0.100000\du}
+				\pgfsetdash{}{0pt}
+				\pgfsetdash{}{0pt}
+				\pgfsetmiterjoin
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\draw (22.200000\du,7.000000\du)--(29.900000\du,7.000000\du);
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\draw (22.200000\du,9.000000\du)--(29.900000\du,9.000000\du);
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{22.200005\du}{7.000000\du}}
+				\pgfpatharc{270}{180}{0.200000\du and 0.200000\du}
+				\pgfusepath{stroke}
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{30.100000\du}{7.200000\du}}
+				\pgfpatharc{360}{270}{0.200000\du and 0.200000\du}
+				\pgfusepath{stroke}
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\draw (22.000000\du,7.200000\du)--(22.000000\du,8.800000\du);
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\draw (30.100000\du,7.200000\du)--(30.100000\du,8.800000\du);
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{22.000000\du}{8.799989\du}}
+				\pgfpatharc{180}{90}{0.200000\du and 0.200000\du}
+				\pgfusepath{stroke}
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\pgfpathmoveto{\pgfpoint{29.899984\du}{9.000000\du}}
+				\pgfpatharc{90}{0}{0.200000\du and 0.200000\du}
+				\pgfusepath{stroke}
+				% setfont left to latex
+				\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+				\pgfsetstrokecolor{dialinecolor}
+				\node at (26.050000\du,8.10000\du){Jordan Normal Form};
+				\pgfsetlinewidth{0.100000\du}
+				\pgfsetdash{}{0pt}
+				\pgfsetdash{}{0pt}
+				\pgfsetbuttcap
+				{
+					\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+					\pgfsetfillcolor{dialinecolor}
+					% was here!!!
+					\pgfsetarrowsend{latex}
+					\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+					\pgfsetstrokecolor{dialinecolor}
+					\draw (4.050000\du,0.980000\du)--(4.050000\du,3.000000\du);
+				}
+				\pgfsetlinewidth{0.100000\du}
+				\pgfsetdash{}{0pt}
+				\pgfsetdash{}{0pt}
+				\pgfsetbuttcap
+				{
+					\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+					\pgfsetfillcolor{dialinecolor}
+					% was here!!!
+					\pgfsetarrowsend{latex}
+					\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+					\pgfsetstrokecolor{dialinecolor}
+					\draw (4.050000\du,4.900000\du)--(4.050000\du,6.250000\du);
+				}
+				\pgfsetlinewidth{0.100000\du}
+				\pgfsetdash{}{0pt}
+				\pgfsetdash{}{0pt}
+				\pgfsetbuttcap
+				{
+					\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+					\pgfsetfillcolor{dialinecolor}
+					% was here!!!
+					\pgfsetarrowsend{latex}
+					\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+					\pgfsetstrokecolor{dialinecolor}
+					\draw (15.050905\du,-3.041786\du)--(15.050303\du,-1.049940\du);
+				}
+				\pgfsetlinewidth{0.100000\du}
+				\pgfsetdash{}{0pt}
+				\pgfsetdash{}{0pt}
+				\pgfsetbuttcap
+				{
+					\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+					\pgfsetfillcolor{dialinecolor}
+					% was here!!!
+					\pgfsetarrowsend{latex}
+					\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+					\pgfsetstrokecolor{dialinecolor}
+					\draw (26.050000\du,0.900000\du)--(26.050000\du,3.000000\du);
+				}
+				\pgfsetlinewidth{0.100000\du}
+				\pgfsetdash{}{0pt}
+				\pgfsetdash{}{0pt}
+				\pgfsetbuttcap
+				{
+					\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+					\pgfsetfillcolor{dialinecolor}
+					% was here!!!
+					\pgfsetarrowsend{latex}
+					\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+					\pgfsetstrokecolor{dialinecolor}
+					\draw (26.050000\du,4.900000\du)--(26.050000\du,7.000000\du);
+				}
+				\pgfsetlinewidth{0.100000\du}
+				\pgfsetdash{}{0pt}
+				\pgfsetdash{}{0pt}
+				\pgfsetbuttcap
+				{
+					\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+					\pgfsetfillcolor{dialinecolor}
+					% was here!!!
+					\pgfsetarrowsend{latex}
+					\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+					\pgfsetstrokecolor{dialinecolor}
+					\draw (4.052209\du,-2.033747\du)--(4.050000\du,-1.000000\du);
+				}
+				\pgfsetlinewidth{0.100000\du}
+				\pgfsetdash{}{0pt}
+				\pgfsetdash{}{0pt}
+				\pgfsetbuttcap
+				{
+					\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+					\pgfsetfillcolor{dialinecolor}
+					% was here!!!
+					\pgfsetarrowsend{latex}
+					\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+					\pgfsetstrokecolor{dialinecolor}
+					\draw (26.046020\du,-2.048652\du)--(26.050000\du,-1.000000\du);
+				}
+				\pgfsetlinewidth{0.100000\du}
+				\pgfsetdash{}{0pt}
+				\pgfsetdash{}{0pt}
+				\pgfsetbuttcap
+				{
+					\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+					\pgfsetfillcolor{dialinecolor}
+					% was here!!!
+					\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+					\pgfsetstrokecolor{dialinecolor}
+					\draw (4.002784\du,-2.000366\du)--(26.000000\du,-2.000000\du);
+				}
+				\pgfsetlinewidth{0.100000\du}
+				\pgfsetdash{}{0pt}
+				\pgfsetdash{}{0pt}
+				\pgfsetbuttcap
+				{
+					\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+					\pgfsetfillcolor{dialinecolor}
+					% was here!!!
+					\pgfsetarrowsstart{latex}
+					\pgfsetarrowsend{latex}
+					\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+					\pgfsetstrokecolor{dialinecolor}
+					\draw (19.100000\du,-0.050000\du)--(22.000000\du,-0.050000\du);
+				}
+				\pgfsetlinewidth{0.100000\du}
+				\pgfsetdash{}{0pt}
+				\pgfsetdash{}{0pt}
+				\pgfsetbuttcap
+				{
+					\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+					\pgfsetfillcolor{dialinecolor}
+					% was here!!!
+					\pgfsetarrowsend{latex}
+					\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+					\pgfsetstrokecolor{dialinecolor}
+					\draw (8.100000\du,3.950000\du)--(22.000000\du,3.950000\du);
+				}
+				\pgfsetlinewidth{0.100000\du}
+				\pgfsetdash{}{0pt}
+				\pgfsetdash{}{0pt}
+				\pgfsetbuttcap
+				{
+					\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+					\pgfsetfillcolor{dialinecolor}
+					% was here!!!
+					\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+					\pgfsetstrokecolor{dialinecolor}
+					\draw (4.051234\du,11.033285\du)--(4.050000\du,9.750000\du);
+				}
+				\pgfsetlinewidth{0.100000\du}
+				\pgfsetdash{}{0pt}
+				\pgfsetdash{}{0pt}
+				\pgfsetbuttcap
+				{
+					\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+					\pgfsetfillcolor{dialinecolor}
+					% was here!!!
+					\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+					\pgfsetstrokecolor{dialinecolor}
+					\draw (26.048759\du,11.016982\du)--(26.050000\du,9.000000\du);
+				}
+				\pgfsetlinewidth{0.100000\du}
+				\pgfsetdash{}{0pt}
+				\pgfsetdash{}{0pt}
+				\pgfsetbuttcap
+				{
+					\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+					\pgfsetfillcolor{dialinecolor}
+					% was here!!!
+					\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+					\pgfsetstrokecolor{dialinecolor}
+					\draw (4.000863\du,11.001661\du)--(26.098452\du,11.004558\du);
+				}
+				\pgfsetlinewidth{0.100000\du}
+				\pgfsetdash{}{0pt}
+				\pgfsetdash{}{0pt}
+				\pgfsetbuttcap
+				{
+					\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+					\pgfsetfillcolor{dialinecolor}
+					% was here!!!
+					\pgfsetarrowsend{latex}
+					\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+					\pgfsetstrokecolor{dialinecolor}
+					\draw (15.049658\du,11.003110\du)--(15.045768\du,12.899062\du);
+				}
+				\end{tikzpicture}
+			\end{table}
+			\noindent\textbf{Part 2: Theory of Polynomials}
+			\begin{equation*}
+			\mathbb{Z} \xrightarrow{\quad\quad\quad} \mathrm{Polynomial~Ring~in~One~Variable} \xrightarrow{\quad\quad\quad} \mathrm{Polynomial~Ring~in~Several~Variables}
+			\end{equation*}
+			\textbf{Part 3: Tensor Product and Exterior Algebra}
+			\begin{equation*}
+			\mathrm{Affine~Space} \xrightarrow{\quad\quad\quad} \mathrm{Projective~Space} \xrightarrow{\quad\quad\quad} \mathrm{Tensor~Product} \xrightarrow{\quad\quad\quad} \mathrm{Exterior~Algebra}
+			\end{equation*}
+			Finally, how to correctly treat matrix is worth discussing. In peronal view, maxtrix is an important tool but it should not dominant this note. For most of the topic, we should use linear space and linear transformation to understand Algebra.
+			\section{Several knowledge as preparation}
+				\subsection{$\mathbb{C}$}
+					Please consult the note: <under construction>
+				\subsection{The field of numbers}
+					Here we should clarify the object we are going to study for mathematics require rigorness. Therefore, we need the following definition:
+					\begin{definition}[The Field of Numbers]
+						Let
+					\end{definition}
+\part{Linear Algebra}
+	\chapter{Vector Space and Matrix}
+	under construction
+	\chapter{Determinant}
+	under construction
+	\chapter{Linear Space and Linear Transformation}
+	under construction
+	\chapter{Bilinear Function and Quadratic Form}
+	under construction
+\part{Polynomial Theory}
+
+\part{Tensor Product and Exterior Algebra}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
