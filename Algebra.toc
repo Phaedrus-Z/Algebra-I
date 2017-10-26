@@ -1,0 +1,12 @@
+\contentsline {chapter}{\numberline {1}Introduction}{2}
+\contentsline {section}{\numberline {1.1}What is Algebra? \& The structure of this note}{2}
+\contentsline {section}{\numberline {1.2}Several knowledge as preparation}{3}
+\contentsline {subsection}{\numberline {1.2.1}$\mathbb {C}$}{3}
+\contentsline {subsection}{\numberline {1.2.2}The field of numbers}{3}
+\contentsline {part}{I\hspace {1em}Linear Algebra}{4}
+\contentsline {chapter}{\numberline {2}Vector Space and Matrix}{5}
+\contentsline {chapter}{\numberline {3}Determinant}{6}
+\contentsline {chapter}{\numberline {4}Linear Space and Linear Transformation}{7}
+\contentsline {chapter}{\numberline {5}Bilinear Function and Quadratic Form}{8}
+\contentsline {part}{II\hspace {1em}Polynomial Theory}{9}
+\contentsline {part}{III\hspace {1em}Tensor Product and Exterior Algebra}{10}
