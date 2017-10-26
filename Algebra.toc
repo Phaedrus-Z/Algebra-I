@@ -3,6 +3,9 @@
 \contentsline {section}{\numberline {1.2}Several knowledge as preparation}{3}
 \contentsline {subsection}{\numberline {1.2.1}$\mathbb {C}$}{3}
 \contentsline {subsection}{\numberline {1.2.2}The field of numbers}{3}
+\contentsline {subsection}{\numberline {1.2.3}Fundamentals of set theory}{3}
+\contentsline {subsection}{\numberline {1.2.4}$\Sigma $ and $\Pi $}{3}
+\contentsline {subsection}{\numberline {1.2.5}Fundamentals of logic}{3}
 \contentsline {part}{I\hspace {1em}Linear Algebra}{4}
 \contentsline {chapter}{\numberline {2}Vector Space and Matrix}{5}
 \contentsline {chapter}{\numberline {3}Determinant}{6}
