@@ -22,6 +22,8 @@
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric, arrows}
 
+\newcommand\im{\mathrm{i}}
+
 %
 \usepackage[margin=5pt]{geometry}
 \usepackage[T1]{fontenc}
@@ -921,8 +923,30 @@
 				\subsection{The field of numbers}
 					Here we should clarify the object we are going to study for mathematics require rigorness. Therefore, we need the following definition:
 					\begin{definition}[The Field of Numbers]
-						
+						~\\Let $K$ be a set and $K\subseteq\mathbb{C}$. If $\exists a\in K\implies a\neq0$, $\forall x,y\implies x\pm y,xy\in K$ and $\forall x,y\in K, y\neq 0\implies x/y\in K$. Then $K$ is a field of numbers.
 					\end{definition}
+					Several common fields of numbers are $\mathbb{C}$, $\mathbb{R}$ and $\mathbb{Q}$. Please note that the set all integers is not a field but since we use it very often, we have a symbol $\mathbb{Z}$ for it.\\
+					Also, please aware that there are much more fields of numbers than just $\mathbb{C}$, $\mathbb{R}$ and $\mathbb{Q}$. For example:
+					\begin{lemma}
+						The set of all Gaussian rationals $\mathbb{Q}(\im):=\{a+b\im\in\mathbb{C}\mid a,b\in \mathbb{Q}\}$ is a field of number.
+					\end{lemma}
+					\begin{proof}
+						$\forall x=a+b\im,y=c+d\im\in\mathbb{Q}(\im):$
+						\begin{itemize}
+							\item $x\pm y=(a+b\im)\pm(c+d\im)=(a\pm c)+(b\pm d)\im\in \mathbb{Q}(\im)$
+							\item $xy=(a+b\im)(c+d\im)=(ac-bd)+(ad+bc)\im\in \mathbb{Q}(\im)$
+							\item $\displaystyle\frac{x}{y}=\frac{a+b\im}{c+d\im}=\frac{ac+bd}{c^2+d^2}+\frac{ac+bd}{c^2+d^2}\;\im\in \mathbb{Q}(\im)$
+						\end{itemize}
+						Therefore, the set of all Gaussian rationals $\mathbb{Q}(\im):=\{a+b\im\in\mathbb{C}\mid a,b\in \mathbb{Q}\}$ is a field of number.
+					\end{proof}
+					\begin{lemma}
+						Let $K$ be any field of numbers, then $\mathbb{Q}\subseteq K$
+					\end{lemma}
+					\begin{proof}
+						We first prove that $\mathbb{N}\subseteq K$, we use induction. In the base case where $n=0$ and $n=1$. Since $K$ is a field fo numbers, $\exists a\in K$ and $a\neq0$. Then $0=a-a\in K$ and $1=a/a\in K$. Now suppose inductively that $n\in K$, then as to $n+1$, $n+1\in K$. This closes the induction, and thus for all natural number $n$, $n\in K$, \textit{i.e.,} $\mathbb{N}\subseteq K$.\\
+						We then demonstrate that $\mathbb{Z}\subseteq K$. $\forall x\in\mathbb{Z}, \exists a,b\in\mathbb{N}\implies x=a-b\in K$. Therefore, $\mathbb{Z}\subseteq K$.\\
+						We finally show that $\mathbb{Q}\subseteq K$. $\forall x\in\mathbb{Q}, \exists a,b\in\mathbb{Z}\implies x=a/b\in K$. Therefore, $\mathbb{Q}\subseteq K$.
+					\end{proof}
 				\subsection{Fundamentals of set theory}
 					Please consult the note: \textit{Analysis I---Logic, Sets, $\mathbb{N}$, $\mathbb{Z}$ and $\mathbb{Q}$}.
 				\subsection{$\Sigma$ and $\Pi$}

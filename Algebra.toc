@@ -4,12 +4,12 @@
 \contentsline {subsection}{\numberline {1.2.1}$\mathbb {C}$}{3}
 \contentsline {subsection}{\numberline {1.2.2}The field of numbers}{3}
 \contentsline {subsection}{\numberline {1.2.3}Fundamentals of set theory}{3}
-\contentsline {subsection}{\numberline {1.2.4}$\Sigma $ and $\Pi $}{3}
-\contentsline {subsection}{\numberline {1.2.5}Fundamentals of logic}{3}
-\contentsline {part}{I\hspace {1em}Linear Algebra}{4}
-\contentsline {chapter}{\numberline {2}Vector Space and Matrix}{5}
-\contentsline {chapter}{\numberline {3}Determinant}{6}
-\contentsline {chapter}{\numberline {4}Linear Space and Linear Transformation}{7}
-\contentsline {chapter}{\numberline {5}Bilinear Function and Quadratic Form}{8}
-\contentsline {part}{II\hspace {1em}Polynomial Theory}{9}
-\contentsline {part}{III\hspace {1em}Tensor Product and Exterior Algebra}{10}
+\contentsline {subsection}{\numberline {1.2.4}$\Sigma $ and $\Pi $}{4}
+\contentsline {subsection}{\numberline {1.2.5}Fundamentals of logic}{4}
+\contentsline {part}{I\hspace {1em}Linear Algebra}{5}
+\contentsline {chapter}{\numberline {2}Vector Space and Matrix}{6}
+\contentsline {chapter}{\numberline {3}Determinant}{7}
+\contentsline {chapter}{\numberline {4}Linear Space and Linear Transformation}{8}
+\contentsline {chapter}{\numberline {5}Bilinear Function and Quadratic Form}{9}
+\contentsline {part}{II\hspace {1em}Polynomial Theory}{10}
+\contentsline {part}{III\hspace {1em}Tensor Product and Exterior Algebra}{11}
