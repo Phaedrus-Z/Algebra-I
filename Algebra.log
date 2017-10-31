@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99996 (TeX Live 2016/W32TeX) (preloaded format=xelatex 2017.6.1)  27 OCT 2017 14:52
+This is XeTeX, Version 3.14159265-2.6-0.99996 (TeX Live 2016/W32TeX) (preloaded format=xelatex 2017.6.1)  31 OCT 2017 21:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1875,26 +1875,26 @@ Overfull \vbox (6.70393pt too high) has occurred while \output is active []
 Chapter 1.
 \du=\skip73
 
-Overfull \hbox (26.20883pt too wide) in paragraph at lines 909--910
+Overfull \hbox (1.23074pt too wide) in paragraph at lines 450--451
 [][] 
  []
 
 [2
 
 ]
-LaTeX Font Info:    Try loading font information for OMS+lmr on input line 936.
+LaTeX Font Info:    Try loading font information for OMS+lmr on input line 477.
 
  (c:/texlive/2016/texmf-dist/tex/latex/lm/omslmr.fd
 File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 936
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 477
 .
 
 (c:/texlive/2016/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 936.
+(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 477.
  [3] [4] [5
 
 ]
@@ -1927,12 +1927,12 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 33350 strings out of 493068
- 654502 string characters out of 6138949
- 747189 words of memory out of 5000000
- 36794 multiletter control sequences out of 15000+600000
+ 33339 strings out of 493068
+ 654097 string characters out of 6138949
+ 747267 words of memory out of 5000000
+ 36783 multiletter control sequences out of 15000+600000
  79463 words of font info for 98 fonts, out of 8000000 for 9000
  1347 hyphenation exceptions out of 8191
- 55i,18n,79p,10441b,963s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,18n,79p,10441b,785s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 Output written on Algebra.pdf (12 pages).
