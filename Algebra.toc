@@ -1,15 +1,16 @@
-\contentsline {chapter}{\numberline {1}Introduction}{2}
-\contentsline {section}{\numberline {1.1}What is Algebra? \& The structure of this note}{2}
-\contentsline {section}{\numberline {1.2}Several knowledge as preparation}{3}
-\contentsline {subsection}{\numberline {1.2.1}$\mathbb {C}$}{3}
-\contentsline {subsection}{\numberline {1.2.2}The field of numbers}{3}
-\contentsline {subsection}{\numberline {1.2.3}Fundamentals of set theory}{3}
-\contentsline {subsection}{\numberline {1.2.4}$\Sigma $ and $\Pi $}{4}
-\contentsline {subsection}{\numberline {1.2.5}Fundamentals of logic}{4}
+\contentsline {chapter}{Preface}{i}
+\contentsline {chapter}{\numberline {1}Introduction}{1}
+\contentsline {section}{\numberline {1.1}What is Algebra? \& The structure of this note}{1}
+\contentsline {section}{\numberline {1.2}Several knowledge as preparation}{2}
+\contentsline {subsection}{\numberline {1.2.1}$\mathbb {C}$}{2}
+\contentsline {subsection}{\numberline {1.2.2}The field of numbers}{2}
+\contentsline {subsection}{\numberline {1.2.3}Fundamentals of set theory}{2}
+\contentsline {subsection}{\numberline {1.2.4}$\Sigma $ and $\Pi $}{3}
+\contentsline {subsection}{\numberline {1.2.5}Fundamentals of logic}{3}
 \contentsline {part}{I\hspace {1em}Linear Algebra}{5}
-\contentsline {chapter}{\numberline {2}Vector Space and Matrix}{6}
-\contentsline {chapter}{\numberline {3}Determinant}{7}
-\contentsline {chapter}{\numberline {4}Linear Space \& Linear\nobreakspace {}Transformation}{8}
-\contentsline {chapter}{\numberline {5}Bilinear\nobreakspace {}Function \& Quadratic\nobreakspace {}Form}{9}
-\contentsline {part}{II\hspace {1em}Polynomial Theory}{10}
-\contentsline {part}{III\hspace {1em}Tensor Product \& Exterior\nobreakspace {}Algebra}{11}
+\contentsline {chapter}{\numberline {2}Vector Space and Matrix}{7}
+\contentsline {chapter}{\numberline {3}Determinant}{9}
+\contentsline {chapter}{\numberline {4}Linear Space \& Linear\nobreakspace {}Transformation}{11}
+\contentsline {chapter}{\numberline {5}Bilinear\nobreakspace {}Function \& Quadratic\nobreakspace {}Form}{13}
+\contentsline {part}{II\hspace {1em}Polynomial Theory}{15}
+\contentsline {part}{III\hspace {1em}Tensor Product \& Exterior\nobreakspace {}Algebra}{17}

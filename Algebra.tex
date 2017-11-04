@@ -1,40 +1,41 @@
 % Please use XelaTeX to compile
-\documentclass[a4paper,oneside]{book}
+\documentclass[a4paper]{book}
 
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{array}
 \usepackage{extarrows}
+\usepackage{enumitem}
 \usepackage{float}
+\usepackage{fancyhdr}
 \usepackage[perpage]{footmisc}
-\usepackage{tikz}
 \usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{manfnt}
+\usepackage{marginnote}
 \usepackage{multirow}
 \usepackage[thmmarks]{ntheorem}
-	{
-		\theoremheaderfont{\normalfont}
-		\theorembodyfont{\normalfont}
-		\theoremsymbol{\mbox{$\Box$}}
-		\newtheorem*{proof}{\textit{Proof.}}
-	}
+{
+	\theoremheaderfont{\normalfont}
+	\theorembodyfont{\normalfont}
+	\theoremsymbol{\mbox{$\Box$}}
+	\newtheorem*{proof}{\textit{Proof.}}
+}
 \usepackage{xeCJK}
 \usepackage[all, pdf]{xy}
-\usepackage{tikz}
-\usetikzlibrary{shapes.geometric, arrows}
-
-\newcommand\im{\mathrm{i}}
 
 %
 \usepackage[margin=5pt]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage{multicol}
+\usepackage{tikz}
 \usepackage{xcoffins}
 \usepackage{color}
-\newcommand\cbox[2][.8]{{\setlength\fboxsep{0pt}\colorbox[gray]{#1}{#2}}}
-\pagestyle{empty}
 \usepackage{atbegshi}% http://ctan.org/pkg/atbegshi
-\AtBeginDocument{\AtBeginShipoutNext{\AtBeginShipoutDiscard}}
-%
+
+\geometry{a4paper,scale=0.8,centering}
+
+\newcommand\cbox[2][.8]{{\setlength\fboxsep{0pt}\colorbox[gray]{#1}{#2}}}
 
 \theorembodyfont{\normalfont}
 \newtheorem{definition}{Definition}[section]
@@ -47,51 +48,68 @@
 \newtheorem{proposition}{Proposition}[section]
 \newtheorem*{verify}{Verify}
 
-\author{Ph\ae drus}
+\newcommand\im{\mathrm{i}}
 
 \begin{document}
+		\pagestyle{empty}
 	\begin{titlepage} %start
-		\NewCoffin \result
-		\NewCoffin \aaa
-		\NewCoffin \bbb
-		\NewCoffin \ccc
-		\NewCoffin \ddd
-		\NewCoffin \eee
-		\NewCoffin \fff
-		\NewCoffin \rulei
-		\NewCoffin \ruleii
-		\NewCoffin \ruleiii
-		
-		\SetHorizontalCoffin \result {}
-		\SetHorizontalCoffin \aaa {\fontsize{52}{50}\sffamily\bfseries\makebox[12cm][c]{Algebra~I}}
-		\SetHorizontalCoffin \bbb {\fontsize{40}{50}\sffamily\bfseries My Mathematics Notes}
-		\SetHorizontalCoffin \ccc {\fontsize{12}{10}\sffamily 
-			\qquad\qquad By A Student from the Australian National University, Canberra \textbullet{} Updated:\,\today}
-		\SetHorizontalCoffin \ddd {\fontsize{28}{20}\sffamily Ph\ae drus}
-		\SetVerticalCoffin \eee {250pt}
-		{\raggedleft\fontsize{35}{35}\sffamily\bfseries 
-			\medskip Linear Algebra}
-		\SetVerticalCoffin \fff {140pt}
-		{\raggedright \fontsize{13}{14}\sffamily\bfseries 
-			~\\~\\~\\~\\~\\~\\~\\~\\~}
-		\RotateCoffin \bbb {90}
-		\RotateCoffin \ccc {270}
-		\SetHorizontalCoffin \rulei  {\color{red}\rule{6.5in}{1pc}}
-		\SetHorizontalCoffin \ruleii {\color{red}\rule{1pc}{23.5cm}}
-		\SetHorizontalCoffin \ruleiii{\color{black}\rule{5pt}{150pt}}
-		\JoinCoffins \result                \aaa 
-		\JoinCoffins \result[\aaa-t,\aaa-r] \rulei   [b,r](0pt,2mm)
-		\JoinCoffins \result[\aaa-b,\aaa-l] \bbb     [B,r](0pt,0pt)
-		\JoinCoffins \result[\bbb-t,\bbb-r] \ruleii  [t,r](-2mm,0pt)
-		\JoinCoffins \result[\aaa-B,\aaa-r] \ccc     [B,l](80pt,14pc)
-		\JoinCoffins \result[\bbb-l,\ccc-B] \fff     [t,r](-2mm,0pt)
-		\JoinCoffins \result[\fff-b,\fff-r] \ruleiii [b,l](2mm,0pt)
-		\JoinCoffins \result[\ccc-r,\fff-l] \eee     [B,r](50pt,-50pt)
-		\JoinCoffins \result[\eee-T,\eee-r] \ddd     [B,r](0pt,6pc)
-		\TypesetCoffin \result
+		\newgeometry{margin=5pt}
+		\begin{figure*}[h]
+			\NewCoffin \result
+			\NewCoffin \aaa
+			\NewCoffin \bbb
+			\NewCoffin \ccc
+			\NewCoffin \ddd
+			\NewCoffin \eee
+			\NewCoffin \fff
+			\NewCoffin \rulei
+			\NewCoffin \ruleii
+			\NewCoffin \ruleiii
+			\SetHorizontalCoffin \result {}
+			\SetHorizontalCoffin \aaa {\fontsize{52}{50}\sffamily\bfseries\makebox[12cm][c]{Algebra~I}}
+			\SetHorizontalCoffin \bbb {\fontsize{40}{50}\sffamily\bfseries My Mathematics Notes}
+			\SetHorizontalCoffin \ccc {\fontsize{12}{10}\sffamily 
+				\qquad\qquad By A Student from the Australian National University, Canberra \textbullet{} Updated:\,\today}
+			\SetHorizontalCoffin \ddd {\fontsize{28}{20}\sffamily Ph\ae drus}
+			\SetVerticalCoffin \eee {250pt}
+			{\raggedleft\fontsize{35}{50}\sffamily\bfseries 
+				\medskip Linear Algebra}
+			\SetVerticalCoffin \fff {140pt}
+			{\raggedright \fontsize{13}{14}\sffamily\bfseries 
+				~\\~\\~\\~\\~\\~\\~\\~\\~}
+			\RotateCoffin \bbb {90}
+			\RotateCoffin \ccc {270}
+			\SetHorizontalCoffin \rulei  {\color{red}\rule{6.5in}{1pc}}
+			\SetHorizontalCoffin \ruleii {\color{red}\rule{1pc}{23.5cm}}
+			\SetHorizontalCoffin \ruleiii{\color{black}\rule{5pt}{150pt}}
+			\JoinCoffins \result                \aaa 
+			\JoinCoffins \result[\aaa-t,\aaa-r] \rulei   [b,r](0pt,2mm)
+			\JoinCoffins \result[\aaa-b,\aaa-l] \bbb     [B,r](0pt,0pt)
+			\JoinCoffins \result[\bbb-t,\bbb-r] \ruleii  [t,r](-2mm,0pt)
+			\JoinCoffins \result[\aaa-B,\aaa-r] \ccc     [B,l](80pt,14pc)
+			\JoinCoffins \result[\bbb-l,\ccc-B] \fff     [t,r](-2mm,0pt)
+			\JoinCoffins \result[\fff-b,\fff-r] \ruleiii [b,l](2mm,0pt)
+			\JoinCoffins \result[\ccc-r,\fff-l] \eee     [B,r](50pt,-50pt)
+			\JoinCoffins \result[\eee-T,\eee-r] \ddd     [B,r](0pt,6pc)
+			\TypesetCoffin \result
+		\end{figure*}
 	\end{titlepage} %end
-	\newgeometry{left=3cm, right=3cm, top=3cm, bottom=3cm}
+	\newgeometry{a4paper,scale=0.8,centering}
+	\frontmatter
+	\chapter{Preface}
+	Under Construction.
 	\tableofcontents
+	
+	\mainmatter
+	\pagestyle{fancy}
+	\fancyhf{}
+	\cfoot{\thepage}
+	\fancyhead[LO]{\slshape \leftmark}
+	\fancyhead[RE]{\slshape Linear Algebra}
+	\fancyhead[LE,RO]{\slshape \rightmark}
+	\renewcommand{\headrulewidth}{0pt}
+	\pagenumbering{arabic}
+	
 	\chapter{Introduction}
 		\section{What is Algebra? \& The structure of this note}
 			Generally speaking, Algebra is a subject about operations. However, to discuss Algebra in a more detailed way, we have to first talk about some history of Algebra.
